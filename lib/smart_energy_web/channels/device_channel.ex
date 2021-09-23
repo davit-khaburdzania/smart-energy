@@ -33,7 +33,8 @@ defmodule SmartEnergy.DeviceChannel do
 
     unless is_nil(device) do
       with {:ok, cons} <- Devices.find_or_create_consumption(%{date: today, device_id: device.id}),
-           {:ok, _cons} <- Devices.update_consumption(cons, %{amount: cons.amount + amount}) do
+           {:ok, cons} <- Devices.update_consumption(cons, %{amount: cons.amount + amount}) do
+        Devices.check_consumption_treshold(device, cons)
       end
     end
 

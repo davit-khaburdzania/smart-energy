@@ -83,6 +83,13 @@ defmodule SmartEnergy.Devices do
     Repo.all(query)
   end
 
+  def check_consumption_treshold(device, consumption) do
+    if device.treshold && device.treshold > consumption.amount do
+      #TODO Implement push notification logic
+      IO.puts("Device daily treshold exceeded")
+    end
+  end
+
   defp put_user(changeset, %User{} = user) do
     Ecto.Changeset.put_assoc(changeset, :user, user)
   end

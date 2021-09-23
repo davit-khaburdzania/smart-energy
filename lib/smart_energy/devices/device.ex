@@ -8,6 +8,7 @@ defmodule SmartEnergy.Devices.Device do
     field :name, :string
     field :online, :boolean, default: false
     field :serial_number, :string
+    field :treshold, :float
 
     belongs_to :user, User
 
@@ -17,7 +18,7 @@ defmodule SmartEnergy.Devices.Device do
   @doc false
   def changeset(device, attrs) do
     device
-    |> cast(attrs, [:name, :serial_number, :online, :active])
-    |> validate_required([:name, :serial_number, :online, :active])
+    |> cast(attrs, [:name, :serial_number, :online, :active, :treshold])
+    |> validate_required([:name, :serial_number])
   end
 end
