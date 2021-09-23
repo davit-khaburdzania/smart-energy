@@ -23,7 +23,8 @@ defmodule SmartEnergyWeb.DeviceView do
       active: device.active,
       treshold: device.treshold,
       consumption_today: ConsumptionView.render("show.json", %{consumption: cons_today}),
-      consumption_last_30_days: ConsumptionView.render("index.json", %{consumptions: cons_last_30_days})
+      consumption_last_30_days:
+        ConsumptionView.render("index.json", %{consumptions: cons_last_30_days})
     }
   end
 end

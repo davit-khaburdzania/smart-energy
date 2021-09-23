@@ -29,10 +29,11 @@ defmodule SmartEnergy.DeviceChannel do
 
   def handle_in("set:consumption", %{"amount" => amount}, socket) do
     device = socket.assigns[:device]
-    today = Date.utc_today
+    today = Date.utc_today()
 
     unless is_nil(device) do
-      with {:ok, cons} <- Devices.find_or_create_consumption(%{date: today, device_id: device.id}),
+      with {:ok, cons} <-
+             Devices.find_or_create_consumption(%{date: today, device_id: device.id}),
            {:ok, cons} <- Devices.update_consumption(cons, %{amount: cons.amount + amount}) do
         Devices.check_consumption_treshold(device, cons)
       end

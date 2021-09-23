@@ -65,27 +65,28 @@ defmodule SmartEnergy.Devices do
   end
 
   def consumption_today_for(device) do
-    today = Date.utc_today
+    today = Date.utc_today()
     attrs = %{date: today, device_id: device.id}
 
     Repo.find_by(Consumption, attrs)
   end
 
   def consumptions_last_30_days_for(device) do
-    today = Date.utc_today
+    today = Date.utc_today()
     last_30_days = Date.add(today, -30)
 
-    query = from(c in Consumption,
-      where: c.date >= ^last_30_days,
-      where: c.date <= ^today
-    )
+    query =
+      from(c in Consumption,
+        where: c.date >= ^last_30_days,
+        where: c.date <= ^today
+      )
 
     Repo.all(query)
   end
 
   def check_consumption_treshold(device, consumption) do
     if device.treshold && device.treshold > consumption.amount do
-      #TODO Implement push notification logic
+      # TODO Implement push notification logic
       IO.puts("Device daily treshold exceeded")
     end
   end

@@ -34,12 +34,14 @@ config :canary,
   unauthorized_handler: {Helpers.Authorization, :handle_unauthorized}
 
 config :smart_energy, :phoenix_swagger,
-swagger_files: %{
-  "priv/static/swagger.json" => [
-    router: SmartEnergyWeb.Router,     # phoenix routes will be converted to swagger paths
-    endpoint: SmartEnergyWeb.Endpoint  # (optional) endpoint config used to set host, port and https schemes.
-  ]
-}
+  swagger_files: %{
+    "priv/static/swagger.json" => [
+      # phoenix routes will be converted to swagger paths
+      router: SmartEnergyWeb.Router,
+      # (optional) endpoint config used to set host, port and https schemes.
+      endpoint: SmartEnergyWeb.Endpoint
+    ]
+  }
 
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason

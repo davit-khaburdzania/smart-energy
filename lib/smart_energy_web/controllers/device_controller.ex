@@ -11,14 +11,14 @@ defmodule SmartEnergyWeb.DeviceController do
   plug(:load_and_authorize_resource, model: Device)
 
   swagger_path :index do
-    get "/devices"
-    summary "Get connected devices"
-    description "Get list of all the connected devices to currently authenticated user account"
-    produces "application/json"
-    tag "Devices"
-    operation_id "list_devices"
-    response 200, "OK", Schema.ref(:Devices)
-    response 400, "Client Error"
+    get("/devices")
+    summary("Get connected devices")
+    description("Get list of all the connected devices to currently authenticated user account")
+    produces("application/json")
+    tag("Devices")
+    operation_id("list_devices")
+    response(200, "OK", Schema.ref(:Devices))
+    response(400, "Client Error")
   end
 
   def index(conn, _params) do
@@ -56,14 +56,13 @@ defmodule SmartEnergyWeb.DeviceController do
     end
   end
 
-
   swagger_path :delete do
-    PhoenixSwagger.Path.delete "/devices/{id}"
-    summary "Remove Device"
-    description "Remove device from connected devices list"
-    tag "Devices"
-    parameter :id, :path, :integer, "Device ID", required: true, example: 3
-    response 203, "No Content - Deleted Successfully"
+    PhoenixSwagger.Path.delete("/devices/{id}")
+    summary("Remove Device")
+    description("Remove device from connected devices list")
+    tag("Devices")
+    parameter(:id, :path, :integer, "Device ID", required: true, example: 3)
+    response(203, "No Content - Deleted Successfully")
   end
 
   def delete(conn, _params) do
@@ -76,32 +75,36 @@ defmodule SmartEnergyWeb.DeviceController do
 
   def swagger_definitions do
     %{
-      Device: swagger_schema do
-        title "Device"
-        description "A device of the application"
-        properties do
-          id :string, "Unique identifier", required: true
-          name :string, "Device name", required: true
-          serial_number :string, "Device serial number"
-          active :boolean, "Device status"
-          online :boolean, "Is device connected and online"
-          treshold :float, "Daily consumption treshold for device"
+      Device:
+        swagger_schema do
+          title("Device")
+          description("A device of the application")
+
+          properties do
+            id(:string, "Unique identifier", required: true)
+            name(:string, "Device name", required: true)
+            serial_number(:string, "Device serial number")
+            active(:boolean, "Device status")
+            online(:boolean, "Is device connected and online")
+            treshold(:float, "Daily consumption treshold for device")
+          end
+
+          example(%{
+            id: "113",
+            name: "Home TV plug",
+            serial_number: "96dfe374-c732-4e45-af08-63b289704e49",
+            active: true,
+            online: true,
+            treshold: 23.5
+          })
+        end,
+      Devices:
+        swagger_schema do
+          title("Devices")
+          description("A collection of Devices")
+          type(:array)
+          items(Schema.ref(:Device))
         end
-        example %{
-          id: "113",
-          name: "Home TV plug",
-          serial_number: "96dfe374-c732-4e45-af08-63b289704e49",
-          active: true,
-          online: true,
-          treshold: 23.5
-        }
-      end,
-      Devices: swagger_schema do
-        title "Devices"
-        description "A collection of Devices"
-        type :array
-        items Schema.ref(:Device)
-      end
     }
   end
 end

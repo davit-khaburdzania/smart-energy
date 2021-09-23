@@ -6,8 +6,18 @@ defmodule SmartEnergy.DevicesTest do
   describe "devices" do
     alias SmartEnergy.Devices.Device
 
-    @valid_attrs %{active: true, name: "some name", online: true, serial_number: "some serial_number"}
-    @update_attrs %{active: false, name: "some updated name", online: false, serial_number: "some updated serial_number"}
+    @valid_attrs %{
+      active: true,
+      name: "some name",
+      online: true,
+      serial_number: "some serial_number"
+    }
+    @update_attrs %{
+      active: false,
+      name: "some updated name",
+      online: false,
+      serial_number: "some updated serial_number"
+    }
     @invalid_attrs %{active: nil, name: nil, online: nil, serial_number: nil}
 
     def device_fixture(attrs \\ %{}) do
@@ -106,7 +116,10 @@ defmodule SmartEnergy.DevicesTest do
 
     test "update_consumption/2 with valid data updates the consumption" do
       consumption = consumption_fixture()
-      assert {:ok, %Consumption{} = consumption} = Devices.update_consumption(consumption, @update_attrs)
+
+      assert {:ok, %Consumption{} = consumption} =
+               Devices.update_consumption(consumption, @update_attrs)
+
       assert consumption.amount == 456.7
       assert consumption.date == ~D[2011-05-18]
     end

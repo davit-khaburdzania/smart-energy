@@ -23,13 +23,16 @@ defmodule SmartEnergyWeb.Router do
     pipe_through([:api, :authenticated])
 
     get("/me", UserController, :show)
-    resources("/devices", DeviceController, except: [:new, :edit])  do
+
+    resources("/devices", DeviceController, except: [:new, :edit]) do
       post("/active", DeviceController, :active)
     end
   end
 
   scope "/api-docs" do
-    forward "/", PhoenixSwagger.Plug.SwaggerUI, otp_app: :smart_energy, swagger_file: "swagger.json"
+    forward "/", PhoenixSwagger.Plug.SwaggerUI,
+      otp_app: :smart_energy,
+      swagger_file: "swagger.json"
   end
 
   def swagger_info do
@@ -53,13 +56,12 @@ defmodule SmartEnergyWeb.Router do
           scheme: "bearer",
           bearerFormat: "JWT",
           name: "Authorization",
-          description:
-          "JWT Token must be provided via `Authorization: Bearer ` header",
-      in: "header"
+          description: "JWT Token must be provided via `Authorization: Bearer ` header",
+          in: "header"
         }
       },
       tags: [
-        %{name: "Devices", description: "Device resources"},
+        %{name: "Devices", description: "Device resources"}
       ]
     }
   end
