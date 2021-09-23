@@ -48,7 +48,8 @@ defmodule SmartEnergy.MixProject do
       {:guardian, "~> 2.0"},
       {:canary, "~> 1.1"},
       {:phoenix_swagger, "~> 0.8"},
-      {:ex_json_schema, "~> 0.5"}
+      {:ex_json_schema, "~> 0.5"},
+      {:credo, "~> 1.0", runtime: false, only: :dev}
     ]
   end
 
