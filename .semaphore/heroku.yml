@@ -25,5 +25,5 @@ blocks:
           - git config --global url.ssh://git@heroku.com/.insteadOf https://git.heroku.com/
           - git remote add heroku $HEROKU_REMOTE
           - git push heroku -f $SEMAPHORE_GIT_BRANCH:master
-          - heroku run --app $HEROKU_APP_NAME POOL_SIZE=2 rake db:migrate 
-          - heroku ps:restart
+          # - heroku run --app $HEROKU_APP_NAME POOL_SIZE=2 rake db:migrate 
+          # - heroku ps:restart
