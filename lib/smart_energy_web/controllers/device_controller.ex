@@ -12,7 +12,7 @@ defmodule SmartEnergyWeb.DeviceController do
 
   swagger_path :index do
     get("/devices")
-    summary("Get connected devices")
+    summary("Get connected devicess")
     description("Get list of all the connected devices to currently authenticated user account")
     produces("application/json")
     tag("Devices")
