@@ -98,3 +98,6 @@ blocks:
           commands:
             # Publish test results
             - test-results publish /tmp/junit.xml
+promotions:
+  - name: Deploy to Heroku
+    pipeline_file: heroku.yml
