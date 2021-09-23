@@ -29,7 +29,7 @@ blocks:
           # job is to work with your code.
           - checkout
 
-          - bin/setup_ci_elixir
+          - .semaphore/setup_ci_elixir
           - sem-version elixir 1.11
 
           # Restore dependencies from cache, command won't fail if it's
@@ -58,7 +58,7 @@ blocks:
       prologue:
         commands:
         - checkout
-        - bin/setup_ci_elixir
+        - .semaphore/setup_ci_elixir
         - sem-version elixir 1.11
         - cache restore
         - cache restore dialyzer-plt
@@ -77,7 +77,7 @@ blocks:
       prologue:
         commands:
         - checkout
-        - bin/setup_ci_elixir
+        - .semaphore/setup_ci_elixir
         - sem-version elixir 1.11
         - cache restore
 
